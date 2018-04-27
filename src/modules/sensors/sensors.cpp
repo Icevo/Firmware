@@ -203,11 +203,11 @@ private:
 
 	/**
 	 * Poll the differential pressure sensor for updated data.
-	 *
+     *
 	 * @param raw			Combined sensor data structure into which
 	 *				data should be returned.
 	 */
-	void		diff_pres_poll(struct sensor_combined_s &raw);
+    void		diff_pres_poll(struct sensor_combined_s &raw);
 
 	/**
 	 * Check for changes in vehicle control mode.
@@ -552,7 +552,7 @@ Sensors::adc_poll()
 					/* In the case where the BOARD_ADC_OPEN_CIRCUIT_V is
 					 * greater than the BOARD_VALID_UV let the HW qualify that it
 					 * is connected.
-					 */
+                     */
 					if (BOARD_ADC_OPEN_CIRCUIT_V > BOARD_VALID_UV) {
 						connected &= valid_chan[b];
 					}
@@ -586,7 +586,7 @@ Sensors::run()
 #endif
 	}
 
-	struct sensor_combined_s raw = {};
+    struct sensor_combined_s raw = {};
 
 	struct sensor_preflight_s preflt = {};
 
@@ -615,8 +615,8 @@ Sensors::run()
 
 	_rc_update.rc_parameter_map_poll(_parameter_handles, true /* forced */);
 
-	/* advertise the sensor_combined topic and make the initial publication */
-	_sensor_pub = orb_advertise(ORB_ID(sensor_combined), &raw);
+    /* advertise the sensor_combined topic and make the initial publication */
+    _sensor_pub = orb_advertise(ORB_ID(sensor_combined), &raw);
 
 	/* advertise the sensor_preflight topic and make the initial publication */
 	preflt.accel_inconsistency_m_s_s = 0.0f;
@@ -677,7 +677,7 @@ Sensors::run()
 
 			_voted_sensors_update.set_relative_timestamps(raw);
 
-			orb_publish(ORB_ID(sensor_combined), _sensor_pub, &raw);
+            orb_publish(ORB_ID(sensor_combined), _sensor_pub, &raw);
 
 			_voted_sensors_update.check_failover();
 

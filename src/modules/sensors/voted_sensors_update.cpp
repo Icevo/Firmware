@@ -80,7 +80,7 @@ VotedSensorsUpdate::VotedSensorsUpdate(const Parameters &parameters, bool hil_en
 	_corrections.baro_scale_1 = 1.0f;
 	_corrections.baro_scale_2 = 1.0f;
 
-	_baro.voter.set_timeout(300000);
+    _baro.voter.set_timeout(300000);
 	_mag.voter.set_timeout(300000);
 	_mag.voter.set_equal_value_threshold(1000);
 
@@ -92,9 +92,9 @@ VotedSensorsUpdate::VotedSensorsUpdate(const Parameters &parameters, bool hil_en
 
 int VotedSensorsUpdate::init(sensor_combined_s &raw)
 {
-	raw.accelerometer_timestamp_relative = sensor_combined_s::RELATIVE_TIMESTAMP_INVALID;
-	raw.magnetometer_timestamp_relative = sensor_combined_s::RELATIVE_TIMESTAMP_INVALID;
-	raw.baro_timestamp_relative = sensor_combined_s::RELATIVE_TIMESTAMP_INVALID;
+    raw.accelerometer_timestamp_relative = sensor_combined_s::RELATIVE_TIMESTAMP_INVALID;
+    raw.magnetometer_timestamp_relative = sensor_combined_s::RELATIVE_TIMESTAMP_INVALID;
+    raw.baro_timestamp_relative = sensor_combined_s::RELATIVE_TIMESTAMP_INVALID;
 	raw.timestamp = 0;
 
 	initialize_sensors();
@@ -169,7 +169,6 @@ void VotedSensorsUpdate::parameters_update()
 					PX4_ERR("gyro temp compensation init: failed to find device ID %u for instance %i",
 						report.device_id, topic_instance);
 					_corrections.gyro_mapping[topic_instance] = 0;
-
 				} else {
 					_corrections.gyro_mapping[topic_instance] = temp;
 

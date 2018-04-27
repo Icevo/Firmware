@@ -76,6 +76,7 @@ MPU9250_mag::MPU9250_mag(MPU9250 *parent, device::Device *interface, const char 
 	_interface(interface),
 	_parent(parent),
 	_mag_topic(nullptr),
+    _aux_mag_topic(nullptr),
 	_mag_orb_class_instance(-1),
 	_mag_class_instance(-1),
 	_mag_reading_data(false),
@@ -154,6 +155,13 @@ MPU9250_mag::init()
 		PX4_ERR("ADVERT FAIL");
 		return -ENOMEM;
 	}
+    /*advertise auxiliar sensor topic */
+     _aux_mag_topic = orb_advertise(ORB_ID(aux_sensor_mag), &mrp);
+
+     if (_aux_mag_topic == nullptr) {
+         PX4_ERR("ADVERT FAIL");
+         return ret;
+     };
 
 	return OK;
 }
@@ -242,6 +250,7 @@ MPU9250_mag::_measure(struct ak8963_regs data)
 	if (mag_notify && !(_pub_blocked)) {
 		/* publish it */
 		orb_publish(ORB_ID(sensor_mag), _mag_topic, &mrb);
+        orb_publish(ORB_ID(aux_sensor_mag), _aux_mag_topic, &mrb);
 	}
 }
 

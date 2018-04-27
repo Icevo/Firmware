@@ -83,7 +83,7 @@ public:
 	 * initialize subscriptions etc.
 	 * @return 0 on success, <0 otherwise
 	 */
-	int init(sensor_combined_s &raw);
+    int init(sensor_combined_s &raw);
 
 	/**
 	 * This tries to find new sensor instances. This is called from init(), then it can be called periodically.
@@ -109,13 +109,13 @@ public:
 	/**
 	 * read new sensor data
 	 */
-	void sensors_poll(sensor_combined_s &raw);
+    void sensors_poll(sensor_combined_s &raw);
 
 	/**
 	 * set the relative timestamps of each sensor timestamp, based on the last sensors_poll,
 	 * so that the data can be published.
 	 */
-	void set_relative_timestamps(sensor_combined_s &raw);
+    void set_relative_timestamps(sensor_combined_s &raw);
 
 	/**
 	 * check if a failover event occured. if so, report it.
@@ -153,7 +153,7 @@ private:
 		{
 			for (unsigned i = 0; i < SENSOR_COUNT_MAX; i++) {
 				enabled[i] = true;
-				subscription[i] = -1;
+                subscription[i] = -1;
 				priority[i] = 0;
 			}
 		}
@@ -176,7 +176,7 @@ private:
 	 * @param raw			Combined sensor data structure into which
 	 *				data should be returned.
 	 */
-	void		accel_poll(struct sensor_combined_s &raw);
+    void		accel_poll(struct sensor_combined_s &raw);
 
 	/**
 	 * Poll the gyro for updated data.
@@ -184,7 +184,7 @@ private:
 	 * @param raw			Combined sensor data structure into which
 	 *				data should be returned.
 	 */
-	void		gyro_poll(struct sensor_combined_s &raw);
+    void		gyro_poll(struct sensor_combined_s &raw);
 
 	/**
 	 * Poll the magnetometer for updated data.
@@ -192,7 +192,7 @@ private:
 	 * @param raw			Combined sensor data structure into which
 	 *				data should be returned.
 	 */
-	void		mag_poll(struct sensor_combined_s &raw);
+    void		mag_poll(struct sensor_combined_s &raw);
 
 	/**
 	 * Poll the barometer for updated data.
@@ -200,7 +200,7 @@ private:
 	 * @param raw			Combined sensor data structure into which
 	 *				data should be returned.
 	 */
-	void		baro_poll(struct sensor_combined_s &raw);
+    void		baro_poll(struct sensor_combined_s &raw);
 
 	/**
 	 * Check & handle failover of a sensor
@@ -248,7 +248,7 @@ private:
 
 	float _last_baro_pressure[BARO_COUNT_MAX]; /**< pressure from last baro sensors */
 	float _last_best_baro_pressure = 0.0f; /**< pressure from last best baro */
-	sensor_combined_s _last_sensor_data[SENSOR_COUNT_MAX]; /**< latest sensor data from all sensors instances */
+    sensor_combined_s _last_sensor_data[SENSOR_COUNT_MAX]; /**< latest sensor data from all sensors instances */
 	uint64_t _last_accel_timestamp[ACCEL_COUNT_MAX]; /**< latest full timestamp */
 	uint64_t _last_mag_timestamp[MAG_COUNT_MAX]; /**< latest full timestamp */
 	uint64_t _last_baro_timestamp[BARO_COUNT_MAX]; /**< latest full timestamp */

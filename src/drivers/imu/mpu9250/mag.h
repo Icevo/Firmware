@@ -133,6 +133,7 @@ protected:
 private:
 	MPU9250 *_parent;
 	orb_advert_t _mag_topic;
+    orb_advert_t _aux_mag_topic;
 	int _mag_orb_class_instance;
 	int _mag_class_instance;
 	bool _mag_reading_data;

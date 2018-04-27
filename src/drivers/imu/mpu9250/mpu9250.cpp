@@ -130,7 +130,9 @@ MPU9250::MPU9250(device::Device *interface, device::Device *mag_interface, const
 	_accel_scale{},
 	_accel_range_scale(0.0f),
 	_accel_range_m_s2(0.0f),
-	_accel_topic(nullptr),
+    _accel_topic(nullptr),
+    _aux_accel_topic(nullptr),
+    _aux_gyro_topic(nullptr),
 	_accel_orb_class_instance(-1),
 	_accel_class_instance(-1),
 	_gyro_reports(nullptr),
@@ -218,6 +220,8 @@ MPU9250::~MPU9250()
 	/* make sure we are truly inactive */
 	stop();
 
+    orb_unadvertise(_aux_accel_topic);
+    orb_unadvertise(_aux_gyro_topic);
 	orb_unadvertise(_accel_topic);
 	orb_unadvertise(_gyro->_gyro_topic);
 
@@ -385,7 +389,7 @@ MPU9250::init()
 
 	/* advertise sensor topic, measure manually to initialize valid report */
 	struct accel_report arp;
-	_accel_reports->get(&arp);
+    _accel_reports->get(&arp);
 
 	/* measurement will have generated a report, publish */
 	_accel_topic = orb_advertise_multi(ORB_ID(sensor_accel), &arp,
@@ -394,7 +398,15 @@ MPU9250::init()
 	if (_accel_topic == nullptr) {
 		PX4_ERR("ADVERT FAIL");
 		return ret;
-	}
+	};
+
+    /*advertise auxiliar sensor topic */
+     _aux_accel_topic = orb_advertise(ORB_ID(aux_sensor_accel), &arp);
+
+     if (_aux_accel_topic == nullptr) {
+         PX4_ERR("ADVERT FAIL");
+         return ret;
+     };
 
 	/* advertise sensor topic, measure manually to initialize valid report */
 	struct gyro_report grp;
@@ -407,6 +419,14 @@ MPU9250::init()
 		PX4_ERR("ADVERT FAIL");
 		return ret;
 	}
+
+    /*advertise auxiliar fyro topic*/
+    _aux_gyro_topic = orb_advertise(ORB_ID(aux_sensor_gyro), &grp);
+
+    if (_aux_gyro_topic == nullptr) {
+        PX4_ERR("ADVERT FAIL");
+        return ret;
+    };
 
 	return ret;
 }
@@ -1495,11 +1515,13 @@ MPU9250::measure()
 		perf_begin(_controller_latency_perf);
 		/* publish it */
 		orb_publish(ORB_ID(sensor_accel), _accel_topic, &arb);
+        orb_publish(ORB_ID(aux_sensor_accel), _aux_accel_topic, &arb);
 	}
 
 	if (gyro_notify && !(_pub_blocked)) {
 		/* publish it */
 		orb_publish(ORB_ID(sensor_gyro), _gyro->_gyro_topic, &grb);
+        orb_publish(ORB_ID(aux_sensor_gyro), _aux_gyro_topic, &grb);
 	}
 
 	/* stop measuring */

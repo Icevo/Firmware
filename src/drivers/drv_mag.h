@@ -50,6 +50,7 @@
 #define MAG2_DEVICE_PATH	"/dev/mag2"
 
 #include <uORB/topics/sensor_mag.h>
+#include <uORB/topics/aux_sensor_mag.h>
 #define mag_report sensor_mag_s
 
 /** mag scaling factors; Vout = (Vin * Vscale) + Voffset */

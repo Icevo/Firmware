@@ -187,7 +187,6 @@ Battery::estimateRemaining(float voltage_v, float current_a, float throttle_norm
 		if (!_battery_initialized) {
 			// initialization of the estimation state
 			_remaining = _remaining_voltage;
-
 		} else {
 			// The lower the voltage the more adjust the estimate with it to avoid deep discharge
 			const float weight_v = 3e-4f * (1 - _remaining_voltage);

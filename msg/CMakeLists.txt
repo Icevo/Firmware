@@ -32,6 +32,12 @@
 ############################################################################
 
 set(msg_files
+	vertical_frame_attitude.msg
+	aux_sensor_preflight.msg
+	aux_sensor_combined.msg
+	aux_sensor_accel.msg
+	aux_sensor_gyro.msg
+	aux_sensor_mag.msg
 	actuator_armed.msg
 	actuator_controls.msg
 	actuator_direct.msg

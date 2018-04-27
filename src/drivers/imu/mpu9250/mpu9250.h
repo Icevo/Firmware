@@ -53,6 +53,7 @@
 #include "gyro.h"
 
 
+#define PX4_I2C_OBDEV_MPU9250	0x68
 
 #if defined(PX4_I2C_OBDEV_MPU9250)
 #  define USE_I2C
@@ -177,7 +178,7 @@
 #define BIT_I2C_SLV2_DLY_EN         0x04
 #define BIT_I2C_SLV3_DLY_EN         0x08
 
-#define MPU_WHOAMI_9250			0x71
+#define MPU_WHOAMI_9250			0x73
 #define MPU_WHOAMI_6500			0x70
 
 #define MPU9250_ACCEL_DEFAULT_RATE	1000
@@ -301,7 +302,10 @@ private:
 	struct accel_calibration_s	_accel_scale;
 	float			_accel_range_scale;
 	float			_accel_range_m_s2;
-	orb_advert_t		_accel_topic;
+    orb_advert_t		_accel_topic;
+    orb_advert_t        _aux_accel_topic;
+    orb_advert_t        _aux_gyro_topic;
+    orb_advert_t        _aux_mag_topic;
 	int			_accel_orb_class_instance;
 	int			_accel_class_instance;
 

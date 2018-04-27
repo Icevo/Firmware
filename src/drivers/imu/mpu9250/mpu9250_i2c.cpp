@@ -161,6 +161,7 @@ MPU9250_I2C::probe()
 {
 	uint8_t whoami = 0;
 	uint8_t expected = MPU_WHOAMI_9250;
+    read(MPUREG_WHOAMI, &whoami, 1);
 	return (read(MPUREG_WHOAMI, &whoami, 1) == OK && (whoami == expected)) ? 0 : -EIO;
 }
 

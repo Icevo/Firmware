@@ -7,19 +7,19 @@ set(config_module_list
 	# Board support modules
 	#
 	#drivers/barometer
-	drivers/differential_pressure
+	#drivers/differential_pressure
 	#drivers/magnetometer
 	#drivers/telemetry
 
 	#drivers/imu/adis16448
-	drivers/airspeed
+	#drivers/airspeed
 	drivers/barometer/ms5611
 	#drivers/blinkm
-	#drivers/imu/bmi160
+	drivers/imu/bmi160
 	#drivers/barometer/bmp280
 	drivers/boards
 	#drivers/bst
-	drivers/camera_trigger
+	#drivers/camera_trigger
 	drivers/device
 	#drivers/frsky_telemetry
 	drivers/gps
@@ -50,14 +50,14 @@ set(config_module_list
 	drivers/vmount
 
 	# distance sensors
-	drivers/distance_sensor/ll40ls
-	drivers/distance_sensor/mb12xx
-	drivers/distance_sensor/sf0x
-	drivers/distance_sensor/sf1xx
-	drivers/distance_sensor/srf02
-	drivers/distance_sensor/srf02_i2c
-	drivers/distance_sensor/teraranger
-	drivers/distance_sensor/tfmini
+	#drivers/distance_sensor/ll40ls
+	#drivers/distance_sensor/mb12xx
+	#drivers/distance_sensor/sf0x
+	#drivers/distance_sensor/sf1xx
+	#drivers/distance_sensor/srf02
+	#drivers/distance_sensor/srf02_i2c
+	#drivers/distance_sensor/teraranger
+	#drivers/distance_sensor/tfmini
 	#drivers/distance_sensor/ulanding
 	modules/sensors
 
@@ -101,7 +101,7 @@ set(config_module_list
 	#
 	# General system control
 	#
-	modules/camera_feedback
+	#modules/camera_feedback
 	modules/commander
 	modules/events
 	#modules/gpio_led
@@ -123,13 +123,13 @@ set(config_module_list
 	#
 	# Vehicle Control
 	#
-	modules/fw_att_control
-	modules/fw_pos_control_l1
+	#modules/fw_att_control
+	#modules/fw_pos_control_l1
 	#modules/gnd_att_control
 	#modules/gnd_pos_control
 	modules/mc_att_control
 	modules/mc_pos_control
-	modules/vtol_att_control
+	#modules/vtol_att_control
 
 	#
 	# Logging
@@ -144,6 +144,10 @@ set(config_module_list
 	modules/systemlib
 	modules/systemlib/param
 	modules/uORB
+
+	#vertical_frame_part
+	modules/aux_imu_sensors
+	modules/vertical_frame_attitude
 
 	#
 	# Libraries
@@ -179,6 +183,10 @@ set(config_module_list
 	#
 	# Demo apps
 	#
+
+	#Vertical Frame test modules
+	examples/vertical_frame_module
+	#examples/vertical_frame_module/aux_sensors
 
 	# Tutorial code from
 	# https://px4.io/dev/px4_simple_app
