@@ -1393,7 +1393,7 @@ MPU9250::measure()
 	/*
 	 * Report buffers.
 	 */
-	accel_report		arb;
+    accel_report	arb;
 	gyro_report		grb;
 
 	/*
@@ -1514,14 +1514,15 @@ MPU9250::measure()
 		/* log the time of this report */
 		perf_begin(_controller_latency_perf);
 		/* publish it */
-		orb_publish(ORB_ID(sensor_accel), _accel_topic, &arb);
+        //orb_publish(ORB_ID(sensor_accel), _aux_accel_topic, &arb);
         orb_publish(ORB_ID(aux_sensor_accel), _aux_accel_topic, &arb);
 	}
 
 	if (gyro_notify && !(_pub_blocked)) {
 		/* publish it */
-		orb_publish(ORB_ID(sensor_gyro), _gyro->_gyro_topic, &grb);
+        //orb_publish(ORB_ID(sensor_gyro), _aux_gyro_topic, &grb);
         orb_publish(ORB_ID(aux_sensor_gyro), _aux_gyro_topic, &grb);
+
 	}
 
 	/* stop measuring */

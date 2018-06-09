@@ -249,7 +249,7 @@ MPU9250_mag::_measure(struct ak8963_regs data)
 
 	if (mag_notify && !(_pub_blocked)) {
 		/* publish it */
-		orb_publish(ORB_ID(sensor_mag), _mag_topic, &mrb);
+        //orb_publish(ORB_ID(sensor_mag), _aux_mag_topic, &mrb);
         orb_publish(ORB_ID(aux_sensor_mag), _aux_mag_topic, &mrb);
 	}
 }
